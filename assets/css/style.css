@@ -1,0 +1,39 @@
+div.jumbotron{
+	background: url(https://www.angst.nu/bilder/hangman-ani.gif);
+}
+div{
+	color: #fff;
+}
+div.form {
+    border-radius: 6px;
+    box-shadow: 4px 4px 5px rgba(250, 114, 114, 0.5);
+    background-color: #000000;
+    color: #252422;
+    position: relative;
+}
+div.form-group{
+	padding-left: 2em;
+}
+#display, #buttons{
+	padding: 2em;
+	padding-left: 2em;
+}
+.blank-spaces{
+	padding: 1em;
+}
+.letter, .display {
+	width: 30px;
+	height: 30px;
+	/*border-style: solid;*/
+	padding: 2px;
+	float: left;
+	margin: 2px;
+}
+.btn-disabled{
+	background-color: grey !important;
+}
+.instructionTxt{
+	font-weight: bold;
+	color: red;
+}
+

@@ -1,6 +1,10 @@
 div.jumbotron{
 	background: url(https://www.angst.nu/bilder/hangman-ani.gif);
 }
+h1{
+	font-size: 2.5em;
+	padding: .25em;
+}
 div{
 	color: #fff;
 }
@@ -14,9 +18,12 @@ div.form {
 div.form-group{
 	padding-left: 2em;
 }
+.form-control-static{
+	padding: .75em;
+}
 #display, #buttons{
 	padding: 2em;
-	padding-left: 2em;
+	margin-bottom: 1em;
 }
 .blank-spaces{
 	padding: 1em;

@@ -1,21 +1,50 @@
 $(document).ready(function() {
 	var easyWords = [
-	 	'broncos',
-	 	'test',
-	 	'look',
-	 	'easy'
+	 	'bat',
+		'owl',
+		'spider',
+		'bug',
+		'rat',
+		'worm',
+		'cat',
+		'snake',
+		'fear',
+		'scary',
+		'boo'
 	];
 	var mediumWords = [
-	 	'medium',
-	 	'juniper',
-	 	'Battle',
-	 	'Mississippi'
+	 	'bogeyman',
+		'mummy',
+		'werewolf',
+		'extraterrestrial',
+		'mutant',
+		'witch',
+		'ghost',
+		'vampire',
+		'zombie',
+		'giant',
+		'villain',
+		'goblin',
+		'warlock'
 	];
 	var hardWords = [
-	 	'Optomology',
-	 	'Exhausted',
-	 	'Perpetual',
-	 	'Superbowl'
+	 	'alarming',
+		'bloodcurdling',
+		'frighten',
+		'shocking',
+		'goosebumps',
+		'spine-chilling',
+		'chilling',
+		'hair-rising',
+		'spooky',
+		'creepy',
+		'horrify',
+		'startling',
+		'eek',
+		'nightmare',
+		'unnerving',
+		'eerie',
+		'petrify'
 	];
 	var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",];
 	var currentWord = '';
@@ -26,6 +55,7 @@ $(document).ready(function() {
 	var numOfLosses = 0;
 	var numOfGuesses = 15;
 	var answerArray = [];
+	var answerArrayDisplay = [];
 	var currentWordLetters = [];
 	var letterBtn;
 
@@ -33,10 +63,10 @@ $(document).ready(function() {
 		currentWord = currentWord.toLowerCase();
  		currentWordLetters = currentWord.split("");
 		for(var i = 0; i < currentWordLetters.length; i++) {
-				answerArray[i] = ' _ ';
+				answerArrayDisplay[i] = ' _ ';
 		}
 		remainingLetters = currentWordLetters.length;
-		var blankSpaces = answerArray.join(' ');
+		var blankSpaces = answerArrayDisplay.join(' ');
 		$('#display').html(blankSpaces);
 
 		for(var i=0; i<letters.length; i++){
@@ -60,21 +90,22 @@ $(document).ready(function() {
  		for(var j = 0; j < currentWordLetters.length; j++) {
 		 	if (currentWordLetters[j] === letterGuessed) {
 	 			remainingLetters--;
-		 		answerArray[j] = letterGuessed;
-	 			$('#display').html(answerArray);
+	 			answerArray[j] = letterGuessed;
+		 		answerArrayDisplay[j] = ' '+letterGuessed+' ';
+	 			$('#display').html(answerArrayDisplay);
 	 			letterInWord = true;
 	 		}
 	 	}
 	 	if(!letterInWord){
 	        $('#guessesLeft').html(numOfGuesses);
 	        wrongLetterGuesses.push(letterGuessed);
-			$('#wrongGuesses').append(letterGuessed);
+			$('#wrongGuesses').append(' '+letterGuessed+' ');
+			numOfGuesses --;
+	 		$('#guessesLeft').html(numOfGuesses);
 	 	}
 	 	gameComplete();
   	}
 	function gameComplete(){
-		numOfGuesses --;
-	 	$('#guessesLeft').html(numOfGuesses);
 		currentWord = currentWord.toLowerCase();
 	    if(currentWord === answerArray.join("")){
 	        numOfWins++;
@@ -95,43 +126,38 @@ $(document).ready(function() {
 	    
 	}
 	function gameOverInstructions(){
-		instructionsDiv = $('<div>');
+		instructionsDiv = $('<h1>');
        	instructionsDiv.addClass('instructionTxt');
        	instructionsDiv.html('Please choose a difficulty to play again!');
        	$('#display').append(instructionsDiv);
 	}
+	function resetGame(){
+		answerArray = [];
+		answerArrayDisplay = [];
+		wrongLetterGuesses = [];
+		$('#display').empty();
+		$('#buttons').empty();
+		$('.instructionTxt').empty();
+		$('#wrongGuesses').empty();
+		$('#guessesLeft').html(numOfGuesses);
+	}
 
 	$('#easyGame').click(function(){
 		currentWord = easyWords[Math.floor(Math.random() * easyWords.length)];
-		numOfGuesses = currentWord.length + 7;
-		answerArray = [];
-		wrongLetterGuesses = [];
-		$('#buttons').empty();
-		$('#wrongGuesses').empty();
-		$('#guessesLeft').html(numOfGuesses);
-		console.log(currentWord);
+		numOfGuesses = 10;
+		resetGame();
 		startGame(currentWord);
 	});
 	$('#mediumGame').click(function(){
 		currentWord = mediumWords[Math.floor(Math.random() * mediumWords.length)];
-		numOfGuesses = currentWord.length + 5;
-		answerArray = [];
-		wrongLetterGuesses = [];
-		$('#buttons').empty();
-		$('#wrongGuesses').empty();
-		$('#guessesLeft').html(numOfGuesses);
-		console.log(currentWord);
+		numOfGuesses = 8;
+		resetGame();
 		startGame(currentWord);
 	});
 	$('#hardGame').click(function(){
 		currentWord = hardWords[Math.floor(Math.random() * hardWords.length)];
-		numOfGuesses = currentWord.length + 3;
-		answerArray = [];
-		wrongLetterGuesses = [];
-		$('#buttons').empty();
-		$('#wrongGuesses').empty();
-		$('#guessesLeft').html(numOfGuesses);
-		console.log(currentWord);
+		numOfGuesses = 5;
+		resetGame();
 		startGame(currentWord);
 	});
 });
